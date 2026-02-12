@@ -1,5 +1,5 @@
 支持XXL_JOB 2.X/3.X
-此start引用了以下包 当需要自指定版本是请提出以下包
+此start引用了以下包 当需要自指定版本是请剔除以下包
 ```xml
 
 <dependency>
