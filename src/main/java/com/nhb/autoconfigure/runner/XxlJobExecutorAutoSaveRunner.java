@@ -57,7 +57,7 @@ public class XxlJobExecutorAutoSaveRunner implements ApplicationRunner {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("userName", userName);
         paramMap.put("password", password);
-        try (HttpResponse httpResponse = HttpRequest.post(xxlJobAdminProperties.getAddresses() + xxlJobConfigProperties.getAdmin().getLoginUri())
+        try (HttpResponse httpResponse = HttpRequest.post(xxlJobAdminProperties.getAddress() + xxlJobConfigProperties.getAdmin().getLoginUri())
                 .form(paramMap)
                 .timeout(15000)
                 .execute()) {
@@ -84,10 +84,10 @@ public class XxlJobExecutorAutoSaveRunner implements ApplicationRunner {
     public boolean saveExecutor(List<HttpCookie> cookies){
         HttpResponse response = this.getRequest(cookies)
                 .method(Method.POST)
-                .setUrl(xxlJobConfigProperties.getAdmin().getAddresses() + xxlJobConfigProperties.getAdmin().getSaveUri())
+                .setUrl(xxlJobConfigProperties.getAdmin().getAddress() + xxlJobConfigProperties.getAdmin().getSaveUri())
                 .form(new HashMap<String, Object>() {{
                     this.put("addressType", "0");
-                    this.put("title", xxlJobConfigProperties.getExecutor().getAppTitle());
+                    this.put("title", StrUtil.isBlank(xxlJobConfigProperties.getExecutor().getAppTitle()) ? StrUtil.subPre(xxlJobConfigProperties.getExecutor().getAppName(),12) : xxlJobConfigProperties.getExecutor().getAppTitle());
                     this.put("appname", xxlJobConfigProperties.getExecutor().getAppName());
                 }})
                 .execute();
@@ -107,7 +107,7 @@ public class XxlJobExecutorAutoSaveRunner implements ApplicationRunner {
     public Integer findGroupByAppName(String appName,List<HttpCookie> cookies){
         HttpResponse response = this.getRequest(cookies)
                 .method(Method.POST)
-                .setUrl(xxlJobConfigProperties.getAdmin().getAddresses() + xxlJobConfigProperties.getAdmin().getGroupUri())
+                .setUrl(xxlJobConfigProperties.getAdmin().getAddress() + xxlJobConfigProperties.getAdmin().getGroupUri())
                 .form(new HashMap<String, Object>() {{
                     this.put("appname", appName);
                 }})
@@ -141,7 +141,7 @@ public class XxlJobExecutorAutoSaveRunner implements ApplicationRunner {
      * @return
      */
     private HttpRequest getRequest(List<HttpCookie> cookies) {
-        HttpRequest request = new HttpRequest(xxlJobConfigProperties.getAdmin().getAddresses());
+        HttpRequest request = new HttpRequest(xxlJobConfigProperties.getAdmin().getAddress());
         request.cookie(cookies);
         request.header("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
         return request;

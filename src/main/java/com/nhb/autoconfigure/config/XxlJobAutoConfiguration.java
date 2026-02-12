@@ -44,7 +44,7 @@ public class XxlJobAutoConfiguration {
         XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
         //调度中心相关配置
         XxlJobAdminConfigProperties xxlJobAdminProperties = xxlJobConfigProperties.getAdmin();
-        String addresses = xxlJobAdminProperties.getAddresses();
+        String addresses = xxlJobAdminProperties.getAddress();
         Assert.notBlank(addresses,"ERROR: XXL_JOB ADDRESS IS EMPTY! PLEASE SETTING THE xxl.job.admin.addresses!");
         //去除空格
         xxlJobSpringExecutor.setAdminAddresses(addresses.trim());

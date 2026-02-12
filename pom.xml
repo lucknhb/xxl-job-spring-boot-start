@@ -45,7 +45,6 @@
             <groupId>com.xuxueli</groupId>
             <artifactId>xxl-job-core</artifactId>
             <version>3.3.2</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

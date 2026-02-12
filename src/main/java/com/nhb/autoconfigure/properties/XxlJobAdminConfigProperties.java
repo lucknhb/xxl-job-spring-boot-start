@@ -13,7 +13,7 @@ public class XxlJobAdminConfigProperties {
     /**
      * 调度中心地址 例如：<a href="http://127.0.0.1:8080/xxl-job-admin"/>http://127.0.0.1:8080/xxl-job-admin</a>
      */
-    private String addresses;
+    private String address;
     /**
      * 调度中心登录路径
      */
